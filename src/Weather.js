@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Weather = () => {
    const [data, setData] = useState({});
@@ -8,8 +9,18 @@ const Weather = () => {
    const currDate = new Date().toLocaleDateString();
    const currTime = new Date().toLocaleTimeString(
     'en-US', {hour: '2-digit', minute: '2-digit'});
+    // Weather API
+    const url = `https://api.openweathermap.org/data/3.0/
+    onecall?${location}}&appid={c412fb8f1ed42194a962dd8b85f34c0c}`;
 
-
+   const searchLocation = (event) => {
+     if(event.key === 'Enter') {
+      axios.get(url).then((response) => {
+        setData(response.data)
+        console.log(response.data)
+      })
+     }
+   }
  
 
 
@@ -19,17 +30,19 @@ const Weather = () => {
         <input
         placeholder="Enter Location"
         className="InputData"
-        type="search"
-        />
+        type="text"
+        value={location}
+        onChange={event => setLocation(event.target.value)}
+        onKeyPress={searchLocation} />
         <div className="date">{currDate}</div>
         <div className="time">{currTime}</div>
         <div className="location">Lafayette</div>
         <div className="condition">Sunny</div>
-        <div className="temp">60</div>
+        <div className="temp">60°</div>
         </div>
         <div className="bottom-data">
           <div className="feels">
-            <p className="bold">65F</p>
+            <p className="bold">65°F</p>
             <p>Feels Like</p>
           </div>
           <div className="humidity">
