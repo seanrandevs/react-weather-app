@@ -1,31 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const Weather = () => {
    const [data, setData] = useState({});
    const [location, setLocation] = useState('');
+   // eslint-disable-next-line
+   const [condition, setCondition] = useState('');
 
    // Getting time
    const currDate = new Date().toLocaleDateString();
    const currTime = new Date().toLocaleTimeString(
     'en-US', {hour: '2-digit', minute: '2-digit'});
     // Weather API
-    const url = `https://api.openweathermap.org/data/3.0/
-    onecall?${location}}&appid={c412fb8f1ed42194a962dd8b85f34c0c}`;
+    const api = `https://api.openweathermap.org/data/2.5/weather?q=
+    ${location}&units=imperial&appid=c412fb8f1ed42194a962dd8b85f34c0c`;
 
    const searchLocation = (event) => {
      if(event.key === 'Enter') {
-      axios.get(url).then((response) => {
+      axios.get(api).then((response) => {
         setData(response.data)
+        setCondition(response.data.weather[0].description)
         console.log(response.data)
       })
+      setLocation('');
      }
    }
- 
-
 
   return (
     <div className="container">
+      <img id="image" alt="" />
         <div className="data">
         <input
         placeholder="Enter Location"
@@ -36,21 +39,23 @@ const Weather = () => {
         onKeyPress={searchLocation} />
         <div className="date">{currDate}</div>
         <div className="time">{currTime}</div>
-        <div className="location">Lafayette</div>
-        <div className="condition">Sunny</div>
-        <div className="temp">60°</div>
+        <div className="location">{data.name}</div>
+        {data.main ? <div className="temp">
+        {data.main.temp}°F</div> : null}
+        {data.weather ? <div className="condition">
+        {data.weather[0].description}</div> : null}
         </div>
         <div className="bottom-data">
           <div className="feels">
-            <p className="bold">65°F</p>
+            {data.main ? <p className="bold">{data.main.feels_like}°</p> : null}
             <p>Feels Like</p>
           </div>
           <div className="humidity">
-            <p className="bold">20%</p>
+            {data.main ? <p className="bold">{data.main.humidity}%</p> : null}
             <p>Humidity</p>
           </div>
           <div className="wind">
-            <p className="bold">12 MPH</p>
+            {data.wind ? <p className="bold">{data.wind.speed} MPH</p> : null}
             <p>Wind Speed</p>
           </div>
         </div>

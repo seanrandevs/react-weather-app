@@ -15,7 +15,7 @@
   justify-content: space-between;
 }
 
-.container:before {
+#image {
   content: '';
   background: url('../public/img/sunny.jpg') 
   no-repeat center center/cover;
@@ -35,7 +35,7 @@
 
   .InputData {
     font-size: 1.2rem;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     padding: 10px 40px;
     border-radius: 30px;
     border: 1px solid rgba(59, 59, 59, 0.8);
@@ -43,21 +43,25 @@
    }
 
    .date, .location {
-    font-size: 1.7rem;
+    font-size: 2.3rem;
     padding-bottom: 5px;
    }
 
    .time {
-    padding-bottom: 50px;
+    padding-bottom: 10px;
    }
 
-   .time, .condition, .temp {
-    font-size: 5rem;
+   .time, .temp, .condition {
+    font-size: 4.5rem;
   }
 
+  .temp, .condition {
+    margin-top: 50px;
+  }
 }
 
-.date, .time, .location, .bottom-data {
+.date, .time, .location,
+.bottom-data {
   font-weight: 500;
 }
 
@@ -78,3 +82,11 @@
   }
 }
 
+.sunny {
+  background: url('../public/img/sunny.jpg') 
+  no-repeat center center/cover;
+}
+.cloudy {
+  background: url('../public/img/cloudy.jpg') 
+  no-repeat center center/cover;
+}
