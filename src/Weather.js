@@ -2,10 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 
 const Weather = () => {
+  // Setting data from the api
    const [data, setData] = useState({});
+   // Setting location
    const [location, setLocation] = useState('');
-   // eslint-disable-next-line
-   const [condition, setCondition] = useState('');
 
    // Getting time
    const currDate = new Date().toLocaleDateString();
@@ -15,20 +15,18 @@ const Weather = () => {
     const api = `https://api.openweathermap.org/data/2.5/weather?q=
     ${location}&units=imperial&appid=c412fb8f1ed42194a962dd8b85f34c0c`;
 
-   const searchLocation = (event) => {
-     if(event.key === 'Enter') {
-      axios.get(api).then((response) => {
-        setData(response.data)
-        setCondition(response.data.weather[0].description)
-        console.log(response.data)
-      })
-      setLocation('');
-     }
-   }
+
+    const searchLocation = (event) => {
+      if(event.key === 'Enter') {
+       axios.get(api).then((response) => {
+         setData(response.data);
+        })
+       setLocation('');
+      }
+    }
 
   return (
     <div className="container">
-      <img id="image" alt="" />
         <div className="data">
         <input
         placeholder="Enter Location"
