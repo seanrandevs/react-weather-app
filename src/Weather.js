@@ -12,9 +12,8 @@ const Weather = () => {
    const currTime = new Date().toLocaleTimeString(
     'en-US', {hour: '2-digit', minute: '2-digit'});
     // Weather API
-    const api = `https://api.openweathermap.org/data/2.5/weather?q=
+   const api = `https://api.openweathermap.org/data/2.5/weather?q=
     ${location}&units=imperial&appid=c412fb8f1ed42194a962dd8b85f34c0c`;
-
 
     const searchLocation = (event) => {
       if(event.key === 'Enter') {
@@ -24,6 +23,7 @@ const Weather = () => {
        setLocation('');
       }
     }
+    console.log(data);
 
   return (
     <div className="container">
@@ -37,7 +37,7 @@ const Weather = () => {
         onKeyPress={searchLocation} />
         <div className="date">{currDate}</div>
         <div className="time">{currTime}</div>
-        <div className="location">{data.name}</div>
+        <div className="location" data-testid="location" >{data.name}</div>
         {data.main ? <div className="temp">
         {data.main.temp}°F</div> : null}
         {data.weather ? <div className="condition">
