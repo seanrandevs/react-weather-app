@@ -52,11 +52,11 @@
    }
 
    .time, .temp, .condition {
-    font-size: 4.5rem;
+    font-size: 3rem;
   }
 
   .temp, .condition {
-    margin-top: 50px;
+    // margin-top: 50px;
     text-align: center;
   }
 }
@@ -72,7 +72,7 @@
   align-items: center;
   text-align: center;
   width: 90%;
-  margin: 1rem auto;
+  margin: 4rem auto;
   padding: 1rem;
   border-radius: 10px;
   background-color: rgba(255,255,255,0.2);
